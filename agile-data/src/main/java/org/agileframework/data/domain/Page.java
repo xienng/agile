@@ -3,6 +3,7 @@ package org.agileframework.data.domain;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Function;
@@ -41,6 +42,11 @@ public class Page<T> {
      */
     protected Long current;
 
+    /**
+     * 可以用于排序的字段
+     */
+    protected List<String> sortFields = new ArrayList<>();
+
 
     /**
      * 判断当前结果是否为空
@@ -65,6 +71,7 @@ public class Page<T> {
         this.total = other.total;
         this.size = other.size;
         this.pages = other.pages;
+        this.current = other.current;
     }
 }
 
