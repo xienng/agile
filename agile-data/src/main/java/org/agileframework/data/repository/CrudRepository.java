@@ -1,6 +1,7 @@
 package org.agileframework.data.repository;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Optional;
 
 /**
@@ -9,27 +10,58 @@ import java.util.Optional;
  */
 public interface CrudRepository<T, ID> {
 
-    T insert(T entity);
+    default T insert(T entity) {
+        return null;
+    }
 
-    T update(T entity);
 
-    Collection<T> insertAll(Collection<T> entities);
+    default T update(T entity) {
+        return null;
+    }
 
-    Optional<T> findById(ID id);
+    default T updateWithLock(T entity) {
+        return null;
+    }
 
-    boolean existById(ID id);
+    default Collection<T> insertAll(Collection<T> entities) {
+        return null;
+    }
 
-    Collection<T> findAllById(Iterable<ID> ids);
 
-    Long count();
+    default Optional<T> findById(ID id) {
+        return Optional.empty();
+    }
 
-    void deleteById(ID id);
 
-    void delete(T entity);
+    default boolean existById(ID id) {
+        return false;
+    }
 
-    void deleteAllById(Collection<ID> ids);
 
-    void deleteAll(Collection<T> entities);
+    default Collection<T> findAllById(Collection<ID> ids) {
+        return Collections.EMPTY_LIST;
+    }
 
-    void deleteAll();
+
+    default Long count() {
+        return null;
+    }
+
+
+    default void deleteById(ID id) {
+    }
+
+
+    default void delete(T entity) {
+    }
+
+
+    default void deleteAllById(Collection<ID> ids) {
+    }
+
+
+    default void deleteAll(Collection<T> entities) {
+    }
+
+
 }

@@ -15,5 +15,4 @@ public interface PagingAndSortingRepository<T, ID> {
 
     List<T> findAll(Sort sort);
 
-    Page<T> findAll(Integer current, Integer size, Sort sort);
 }
