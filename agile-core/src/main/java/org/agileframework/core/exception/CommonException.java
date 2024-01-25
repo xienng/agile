@@ -9,28 +9,38 @@ import org.springframework.http.ProblemDetail;
  * @create 2024-01-15 17:36
  */
 @NoArgsConstructor
-public abstract class AbstractException extends RuntimeException {
+public class CommonException extends RuntimeException {
 
     protected ProblemDetail detail;
 
-    public AbstractException(String message) {
+    public CommonException(String message) {
         super(message);
     }
 
-    public AbstractException(ProblemDetail detail) {
+    public CommonException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
+    public CommonException(ProblemDetail detail) {
         super(detail.getDetail());
         this.detail = detail;
     }
 
-    public AbstractException(HttpStatus status, String title, String message) {
+    public CommonException(HttpStatus status, String title, String message) {
         super(message);
         this.detail = ProblemDetail.forStatusAndDetail(status, message);
         this.detail.setTitle(title);
     }
 
-    public AbstractException(HttpStatus status, String title) {
+    public CommonException(HttpStatus status, String title) {
         super(title);
         this.detail = ProblemDetail.forStatus(status);
+        this.detail.setTitle(title);
+    }
+
+    public CommonException(HttpStatus status, String title, String message, Throwable cause) {
+        super(message, cause);
+        this.detail = ProblemDetail.forStatusAndDetail(status, message);
         this.detail.setTitle(title);
     }
 }

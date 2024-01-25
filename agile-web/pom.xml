@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.agileframework</groupId>
         <artifactId>agile</artifactId>
-        <version>2024.1.0</version>
+        <version>2024.1</version>
     </parent>
     <packaging>jar</packaging>
     <artifactId>agile-web</artifactId>
@@ -18,6 +18,11 @@
         <dependency>
             <groupId>org.agileframework</groupId>
             <artifactId>agile-data</artifactId>
+            <version>${parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.agileframework</groupId>
+            <artifactId>agile-core</artifactId>
             <version>${parent.version}</version>
         </dependency>
         <dependency>

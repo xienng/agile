@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.agileframework</groupId>
         <artifactId>agile</artifactId>
-        <version>2024.1.0</version>
+        <version>2024.1</version>
     </parent>
     <packaging>jar</packaging>
     <artifactId>agile-core</artifactId>
@@ -15,6 +15,11 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>32.1.3-jre</version>
         </dependency>
     </dependencies>
 </project>

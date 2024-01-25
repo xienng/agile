@@ -11,7 +11,7 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
  * @author xienng
  * @create 2024-01-16 14:03
  */
-public class NotFoundException extends AbstractException {
+public class NotFoundException extends CommonException {
 
 
     public NotFoundException(String message) {

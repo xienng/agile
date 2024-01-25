@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.agileframework</groupId>
     <artifactId>agile</artifactId>
-    <version>2024.1.0</version>
+    <version>2024.1</version>
     <packaging>pom</packaging>
     <name>agile</name>
     <properties>
@@ -14,12 +14,12 @@
     <modules>
         <module>agile-core</module>
         <module>agile-data</module>
+        <module>agile-cache</module>
         <module>agile-web</module>
     </modules>
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <!-- Import dependency management from Spring Boot -->
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
                 <version>3.2.1</version>

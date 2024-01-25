@@ -8,6 +8,12 @@
         <version>2024.1</version>
     </parent>
     <packaging>jar</packaging>
-    <artifactId>agile-data</artifactId>
-    <name>agile-data</name>
+    <artifactId>agile-cache</artifactId>
+    <name>agile-cache</name>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+    </dependencies>
 </project>
