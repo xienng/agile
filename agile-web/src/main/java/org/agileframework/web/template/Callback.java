@@ -5,7 +5,7 @@ package org.agileframework.web.template;
  * @create 2024-01-13 12:19
  */
 
-import org.agileframework.web.result.RestApiResult;
+import org.agileframework.web.domain.result.ApiResult;
 
 /**
  * 执行模板回调
@@ -53,5 +53,5 @@ public interface Callback<C extends Context, T> {
      * @param context 上下文
      * @return 响应结果
      */
-    RestApiResult<T> process(C context);
+    ApiResult<T> process(C context);
 }

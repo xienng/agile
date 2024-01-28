@@ -1,4 +1,4 @@
-package org.agileframework.web.request;
+package org.agileframework.web.domain.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
