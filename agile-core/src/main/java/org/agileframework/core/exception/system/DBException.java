@@ -1,4 +1,4 @@
-package org.agileframework.core.exception;
+package org.agileframework.core.exception.system;
 
 /**
  * 数据库异常
@@ -7,7 +7,7 @@ package org.agileframework.core.exception;
  * @version 1.0
  * @date 2024年01月28日 18:54
  */
-public class DBException extends MiddlewareException {
+public class DBException extends SystemException {
     public DBException(Throwable cause) {
         super(cause);
     }

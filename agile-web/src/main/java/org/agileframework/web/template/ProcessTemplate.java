@@ -1,13 +1,13 @@
 package org.agileframework.web.template;
 
 
-import org.agileframework.core.exception.BusinessException;
-import org.agileframework.core.exception.SystemException;
+import org.agileframework.core.exception.business.BusinessException;
+import org.agileframework.core.exception.system.SystemException;
 import org.agileframework.web.domain.result.ApiResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static org.agileframework.core.exception.code.CommonBusinessCodes.SERVICE_INTERNAL_ERROR;
+import static org.agileframework.core.exception.code.CommonBusinessCodes.INTERNAL_SERVER_ERROR;
 
 /**
  * 执行模板
@@ -41,7 +41,7 @@ public class ProcessTemplate {
             if (ex instanceof SystemException) {
                 LOGGER.error("系统异常", ex);
             }
-            throw new BusinessException(SERVICE_INTERNAL_ERROR);
+            throw new BusinessException(INTERNAL_SERVER_ERROR);
         }
         try {
             return callback.process(context);
@@ -53,7 +53,7 @@ public class ProcessTemplate {
             if (ex instanceof SystemException) {
                 LOGGER.error("系统异常", ex);
             }
-            throw new BusinessException(SERVICE_INTERNAL_ERROR);
+            throw new BusinessException(INTERNAL_SERVER_ERROR);
         }
     }
 }

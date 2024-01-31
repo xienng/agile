@@ -1,6 +1,6 @@
 package org.agileframework.web.advice;
 
-import org.agileframework.core.exception.BusinessException;
+import org.agileframework.core.exception.business.BusinessException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ProblemDetail;
@@ -15,7 +15,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import static org.agileframework.core.exception.code.CommonBusinessCodes.PARAM_INVALID;
+import static org.agileframework.core.exception.code.CommonBusinessCodes.ILLEGAL_ARGUMENT;
 
 /**
  * [简要描述类用途]
@@ -34,10 +34,10 @@ public class RestErrorAdvice extends ResponseEntityExceptionHandler {
 
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
-        ProblemDetail detail = ProblemDetail.forStatusAndDetail(PARAM_INVALID.status(),
-                ex.getBindingResult().getFieldErrors().get(0).getDefaultMessage());
-        detail.setTitle(PARAM_INVALID.title());
-        return new ResponseEntity(detail, headers, PARAM_INVALID.status());
+        String detailMsg = ex.getBindingResult().getFieldErrors().get(0).getDefaultMessage();
+        ProblemDetail detail = ProblemDetail.forStatusAndDetail(ILLEGAL_ARGUMENT.status(), detailMsg);
+        detail.setTitle(ILLEGAL_ARGUMENT.title());
+        return new ResponseEntity(detail, headers, ILLEGAL_ARGUMENT.status());
     }
 
     @ResponseBody

@@ -2,17 +2,20 @@ package org.agileframework.web.security.interceptor;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.agileframework.web.security.core.AnnotationSecurityManager;
 import org.agileframework.web.security.annotation.SecurityIgnore;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
-import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.lang.Nullable;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
+import java.lang.reflect.Method;
 import java.util.LinkedHashSet;
 import java.util.Set;
+
+import static org.springframework.core.annotation.AnnotationUtils.findAnnotation;
 
 /**
  * [简要描述类用途]
@@ -27,9 +30,20 @@ import java.util.Set;
  */
 public class WebSecurityInterceptor implements HandlerInterceptor, ApplicationListener<ContextRefreshedEvent> {
     private final Set<HandlerMethod> securityIgnoreHandlers = new LinkedHashSet<>();
+    private final AnnotationSecurityManager annotationSecurityManager;
+
+
+    public WebSecurityInterceptor(AnnotationSecurityManager annotationSecurityManager) {
+        this.annotationSecurityManager = annotationSecurityManager;
+    }
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
+        if (securityIgnoreHandlers.contains(handler)) {
+            return true;
+        }
+        Method method = ((HandlerMethod) handler).getMethod();
+        annotationSecurityManager.accept(method);
         return true;
     }
 
@@ -43,11 +57,8 @@ public class WebSecurityInterceptor implements HandlerInterceptor, ApplicationLi
         //RequestMappingHandlerMapping收集了所有的控制器
         //遍历所有控制器，捞出有@NSecurityIgnore注解的HandlerMethod
         event.getApplicationContext().getBean(RequestMappingHandlerMapping.class).getHandlerMethods().values().forEach(handlerMethod -> {
-            SecurityIgnore anno = AnnotationUtils.findAnnotation(handlerMethod.getMethod(), SecurityIgnore.class);
-            if (anno == null) {
-                anno = AnnotationUtils.findAnnotation(handlerMethod.getBeanType(), SecurityIgnore.class);
-            }
-            if (anno != null) {
+            SecurityIgnore anno = findAnnotation(handlerMethod.getMethod(), SecurityIgnore.class);
+            if (anno != null || findAnnotation(handlerMethod.getBeanType(), SecurityIgnore.class) != null) {
                 securityIgnoreHandlers.add(handlerMethod);
             }
         });

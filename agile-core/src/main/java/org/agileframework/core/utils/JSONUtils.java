@@ -1,14 +1,13 @@
 package org.agileframework.core.utils;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.JavaType;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.*;
 import org.apache.commons.lang3.StringUtils;
 
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.List;
@@ -21,6 +20,18 @@ import java.util.Map;
  * @date 2024-01-18 21:50
  */
 public class JSONUtils {
+
+
+    /**
+     * 将形如<code>'2011-12-03T10:15:30Z'</code>这样的iso时间格式转换成unix时间戳
+     */
+    public static class IsoToUnixTimeSerializer extends JsonSerializer<String> {
+        @Override
+        public void serialize(String value, JsonGenerator gen,
+                              SerializerProvider serializers) throws IOException {
+            gen.writeNumber(TimeUtils.unixTimeWithISO(value));
+        }
+    }
 
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 

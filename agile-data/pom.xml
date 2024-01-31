@@ -10,4 +10,15 @@
     <packaging>jar</packaging>
     <artifactId>agile-data</artifactId>
     <name>agile-data</name>
+    <dependencies>
+        <dependency>
+            <groupId>org.agileframework</groupId>
+            <artifactId>agile-core</artifactId>
+            <version>${parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-commons</artifactId>
+        </dependency>
+    </dependencies>
 </project>

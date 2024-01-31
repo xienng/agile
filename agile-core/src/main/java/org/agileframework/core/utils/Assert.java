@@ -3,7 +3,8 @@ package org.agileframework.core.utils;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Valid;
 import jakarta.validation.Validation;
-import org.agileframework.core.exception.BusinessException;
+import org.agileframework.core.exception.business.BusinessException;
+import org.agileframework.core.exception.business.IllegalArgumentException;
 import org.agileframework.core.exception.code.ErrorCode;
 import org.springframework.util.CollectionUtils;
 
@@ -11,7 +12,7 @@ import java.util.Collection;
 import java.util.Set;
 import java.util.function.Supplier;
 
-import static org.agileframework.core.exception.code.CommonBusinessCodes.PARAM_INVALID;
+import static org.agileframework.core.exception.code.CommonBusinessCodes.ILLEGAL_ARGUMENT;
 
 /**
  * 参数校验助手类
@@ -29,7 +30,7 @@ public class Assert {
      */
     public static void isTrue(boolean expression, String detail) {
         if (!expression) {
-            throw new BusinessException(PARAM_INVALID, detail);
+            throw new IllegalArgumentException(detail);
         }
     }
 
@@ -49,14 +50,14 @@ public class Assert {
         Set<ConstraintViolation<@Valid T>> constraintViolations = Validation.buildDefaultValidatorFactory().getValidator().validate(bean);
         if (!constraintViolations.isEmpty()) {
             String detail = constraintViolations.iterator().next().getMessage();
-            throw new BusinessException(PARAM_INVALID, detail);
+            throw new IllegalArgumentException(detail);
         }
     }
 
 
     public static void isNull(Object value) {
         if (value != null) {
-            throw new BusinessException(PARAM_INVALID);
+            throw new BusinessException(ILLEGAL_ARGUMENT);
         }
     }
 
@@ -67,7 +68,7 @@ public class Assert {
      * @param detail
      */
     public static void isNull(Object value, String detail) {
-        isNull(value, PARAM_INVALID, detail);
+        isNull(value, ILLEGAL_ARGUMENT, detail);
     }
 
     public static void isNull(Object value, ErrorCode errorCode, String detail) {
@@ -83,7 +84,7 @@ public class Assert {
      * @param detail
      */
     public static void notNull(Object value, String detail) {
-        notNull(value, PARAM_INVALID, detail);
+        notNull(value, ILLEGAL_ARGUMENT, detail);
     }
 
 
@@ -121,7 +122,7 @@ public class Assert {
      */
     public static void notBothNull(Object first, Object second, String detail) {
         if (first == null && second == null) {
-            throw new BusinessException(PARAM_INVALID, detail);
+            throw new IllegalArgumentException(detail);
         }
     }
 
@@ -134,7 +135,7 @@ public class Assert {
      */
     public static void bigger(Long bigger, Long smaller, String detail) {
         if (bigger == null || smaller == null || bigger.compareTo(smaller) <= 0) {
-            throw new BusinessException(PARAM_INVALID, detail);
+            throw new IllegalArgumentException(detail);
         }
     }
 
@@ -146,7 +147,7 @@ public class Assert {
      */
     public static void empty(Collection<?> collection, String detail) {
         if (!CollectionUtils.isEmpty(collection)) {
-            throw new BusinessException(PARAM_INVALID, detail);
+            throw new IllegalArgumentException(detail);
         }
     }
 

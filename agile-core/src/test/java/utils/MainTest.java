@@ -1,4 +1,4 @@
-package org.agileframework.core.exception;
+package utils;
 
 /**
  * [简要描述类用途]
@@ -9,9 +9,11 @@ package org.agileframework.core.exception;
  *
  * @author xienng
  * @version 1.0
- * @date 2024年01月28日 19:32
+ * @date 2024年01月29日 12:02
  */
-public class SystemException extends RuntimeException {
+public class MainTest {
 
+    public static void main(String[] args) {
 
+    }
 }

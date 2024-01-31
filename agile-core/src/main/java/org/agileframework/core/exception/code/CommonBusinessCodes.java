@@ -14,7 +14,7 @@ import org.springframework.http.HttpStatus;
  * @date 2024年01月28日 14:55
  */
 public enum CommonBusinessCodes implements ErrorCode {
-    PARAM_INVALID("参数错误", HttpStatus.BAD_REQUEST),
+    ILLEGAL_ARGUMENT("非法参数", HttpStatus.BAD_REQUEST),
 
     UNAUTHORIZED("未认证", HttpStatus.UNAUTHORIZED),
 
@@ -22,11 +22,11 @@ public enum CommonBusinessCodes implements ErrorCode {
 
     PERMISSION_DENIED("无操作权限", HttpStatus.FORBIDDEN),
 
-    NOT_FOUND("资源未找到", HttpStatus.NOT_FOUND),
+    RESOURCE_NOT_FOUND("资源未找到", HttpStatus.NOT_FOUND),
 
     REMOTE_CONTENT_INVALID("远程内容错误", HttpStatus.BAD_REQUEST),
 
-    SERVICE_INTERNAL_ERROR("服务器内部异常", HttpStatus.INTERNAL_SERVER_ERROR);
+    INTERNAL_SERVER_ERROR("服务器内部异常", HttpStatus.INTERNAL_SERVER_ERROR);
     private final HttpStatus status;
     private final String message;
 

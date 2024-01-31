@@ -1,5 +1,8 @@
 package org.agileframework.web.security.core;
 
+import java.lang.reflect.Method;
+import java.util.function.Consumer;
+
 /**
  * [简要描述类用途]
  * <p>
@@ -9,13 +12,11 @@ package org.agileframework.web.security.core;
  *
  * @author xienng
  * @version 1.0
- * @date 2024年01月27日 22:00
+ * @date 2024年01月29日 14:14
  */
-public interface SecurityManager {
+public class AnnotationSecurityManager implements Consumer<Method> {
+    @Override
+    public void accept(Method method) {
 
-
-    public String getToken();
-
-    Long getLoginUserId();
-
+    }
 }
